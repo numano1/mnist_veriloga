@@ -1,0 +1,22 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, digi_gate_switch, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module digi_gate_switch(
+    input electrical Vin,   // Input voltage to be passed
+    input electrical Ctrl,  // Control signal: when > Vth, pass Vin; else output 0
+    output electrical Vout  // Output node
+);
+  // Parameter definitions
+  parameter real Vth = 0.6;         // Control threshold voltage
+
+  // Analog block to compute the target voltage based on Ctrl and Vin.
+  analog begin
+    if (V(Ctrl) > Vth)
+	V(Vout) <+ V(Vin);
+    else
+	V(Vout) <+ 0;
+  end
+
+endmodule

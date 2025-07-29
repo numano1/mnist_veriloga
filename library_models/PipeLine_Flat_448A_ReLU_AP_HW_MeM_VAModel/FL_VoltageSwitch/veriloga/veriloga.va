@@ -1,0 +1,9 @@
+// VerilogA for PipeLine_Flat_448A_ReLU_AP_HW_MeM_VAModel, FL_VoltageSwitch, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module FL_VoltageSwitch;
+
+
+endmodule

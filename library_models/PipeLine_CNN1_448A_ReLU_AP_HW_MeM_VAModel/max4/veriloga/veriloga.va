@@ -1,0 +1,29 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, max16, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module max4(
+    input electrical in0,
+    input electrical in1,
+    input electrical in2,
+    input electrical in3,
+    output electrical out
+);
+
+  real max_val;
+
+  analog begin
+    // Start by assigning the first input voltage as the maximum
+    max_val = V(in0);
+    
+    if (V(in1) > max_val) max_val = V(in1);
+    if (V(in2) > max_val) max_val = V(in2);
+    if (V(in3) > max_val) max_val = V(in3);
+
+    // Drive the output with the maximum value.
+    V(out) <+ max_val;
+  end
+
+endmodule
+

@@ -1,0 +1,49 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, I2V_Converter, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module I2V_Converter(inout Iin, output vout, input Vreg);
+  electrical Iin, vout, Vreg;
+  
+  // Parameters
+
+//The effective resolution (in bits) for the MAC is given by B_total = B_D + B_W + log(N)
+//B_D = 4 bits (input precision),
+//B_W = 3 bits (magnitude) plus 1 sign bit  4 bits total, and
+//N = 9 MDACs, so log(9)  3.17 bits.
+//B_total  4 + 4 + 3.17 = 11.17 bits. 
+//This effective resolution corresponds to about 2^(11.17)  2304 discrete steps.
+//Each MDACs current output goes from 0 A (code 000) to 1.64 A (code 1111). 
+//When 9 MDACs are summed, the maximum positive current is
+//I_FS_total = 9 * 1.64 uA = 14.76 uA.
+
+//Because the MAC is bipolar (ranging from I_FS_total to +I_FS_total), the full current span is
+//I = 2 * 14.76 uA = 29.52 uA.
+//Thus, the smallest current increment (current LSB) is
+//I_LSB = I / 2304 = 29.52 uA / 2304 = 12.82 nA.
+
+//We want the output voltage to span from 0.4 V to 0.8 V, with the zero of the analog path at 0.6 V. 
+//That is, a 0.2 V swing around 0.6 V. 
+//To maintain the same resolution, the voltage LSB must be
+//V_LSB = (0.8 V - 0.4 V) / 2304 = 0.4 V / 2304 = 0.174 mV per step.
+
+//R_fb = V_LSB / I_LSB = 0.174 mV / 12.82 nA = 13.57 kohm
+
+// The above will scale the value of the current down, and actually, that doesn't represent the value 
+// of correct level of the signal, for this implementation. RFB = RU = 100e3
+
+
+  parameter real R_FB = 100e3;   // Reference resistor in ohms.
+  
+  analog begin
+    
+   // Convert input current to output voltage using the scaled formula:
+   // vout = Voffset + scale * (-Iin * R_FB)
+   // V(vout) <+ Voffset + scale * (-I(Iin) * R_FB);
+    V(Iin) <+  V(Vreg);
+	//V(vout) <+ Voffset + (-I(Iin) * R_FB);
+	V(vout) <+  V(Vreg) + (I(Iin) * R_FB);
+  end
+endmodule
+

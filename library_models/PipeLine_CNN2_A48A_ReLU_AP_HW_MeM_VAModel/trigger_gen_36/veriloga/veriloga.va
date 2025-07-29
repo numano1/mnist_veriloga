@@ -1,0 +1,210 @@
+// VerilogA for PipeLine_CNN2_A48A_ReLU_AP_HW_MeM_VAModel, trigger_gen_36, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module trigger_gen_36 (
+    input electrical clk,         // Clock signal
+    input electrical enable,      // Enable: high >0.6V, low otherwise
+    output electrical trigger1,   // Trigger outputs
+    output electrical trigger2,
+    output electrical trigger3,
+    output electrical trigger4,
+    output electrical trigger5,
+    output electrical trigger6,
+    output electrical trigger7,
+    output electrical trigger8,
+    output electrical trigger9,
+    output electrical trigger10,
+    output electrical trigger11,
+    output electrical trigger12,
+    output electrical trigger13,
+    output electrical trigger14,
+    output electrical trigger15,
+    output electrical trigger16,
+    output electrical trigger17,
+    output electrical trigger18,
+    output electrical trigger19,
+    output electrical trigger20,
+    output electrical trigger21,
+    output electrical trigger22,
+    output electrical trigger23,
+    output electrical trigger24,
+    output electrical trigger25,
+    output electrical trigger26,
+    output electrical trigger27,
+    output electrical trigger28,
+    output electrical trigger29,
+    output electrical trigger30,
+    output electrical trigger31,
+    output electrical trigger32,
+    output electrical trigger33,
+    output electrical trigger34,
+    output electrical trigger35,
+    output electrical trigger36,
+    output electrical flag         // Flag output: goes high (1.2V) on the clock cycle following trigger36
+);
+
+  // Define voltage levels.
+  parameter real VHIGH = 1.2;
+  parameter real VLOW  = 0.0;
+  parameter real VTH   = 0.6;  // Threshold for both enable and clock edge detection
+
+  // Internal counter:
+  //  count = 0: no active trigger (or enable is low)
+  //  count = 1..36: corresponding trigger output is high (only that trigger is high)
+  //  count = 37: flag cycle (all triggers low, flag high)
+  integer count;
+
+  // Initialization: set counter to 0 at simulation startup.
+  analog begin
+    @(initial_step) begin
+      count = 0;
+    end
+  end
+
+  // Clocked update: at every rising edge of clk (when V(clk) crosses VTH upward)
+  // update the counter if enable is high; if enable is low, reset count to 0.
+  analog begin
+    @(cross(V(clk) - VTH, +1)) begin
+      if (V(enable) > VTH) begin
+         if (count == 0) begin
+           count = 1;
+         end else if (count < 36) begin
+           count = count + 1;
+         end else if (count == 36) begin
+           count = 37;  // after trigger36, go to flag cycle
+         end else if (count == 37) begin
+           count = 1;   // reset cycle on next clock
+         end
+      end else begin
+         count = 0; // when enable is low, reset counter
+      end
+    end
+  end
+
+  // Continuous output assignments:
+  // When enable is low or count is 0, all outputs are low.
+  // When count is 37, all triggers are low and flag is high.
+  // Otherwise (count 1 to 36), only the corresponding trigger is high and flag is low.
+  analog begin
+    if (V(enable) <= VTH || count == 0) begin
+      V(trigger1)  <+ VLOW;
+      V(trigger2)  <+ VLOW;
+      V(trigger3)  <+ VLOW;
+      V(trigger4)  <+ VLOW;
+      V(trigger5)  <+ VLOW;
+      V(trigger6)  <+ VLOW;
+      V(trigger7)  <+ VLOW;
+      V(trigger8)  <+ VLOW;
+      V(trigger9)  <+ VLOW;
+      V(trigger10) <+ VLOW;
+      V(trigger11) <+ VLOW;
+      V(trigger12) <+ VLOW;
+      V(trigger13) <+ VLOW;
+      V(trigger14) <+ VLOW;
+      V(trigger15) <+ VLOW;
+      V(trigger16) <+ VLOW;
+      V(trigger17) <+ VLOW;
+      V(trigger18) <+ VLOW;
+      V(trigger19) <+ VLOW;
+      V(trigger20) <+ VLOW;
+      V(trigger21) <+ VLOW;
+      V(trigger22) <+ VLOW;
+      V(trigger23) <+ VLOW;
+      V(trigger24) <+ VLOW;
+      V(trigger25) <+ VLOW;
+      V(trigger26) <+ VLOW;
+      V(trigger27) <+ VLOW;
+      V(trigger28) <+ VLOW;
+      V(trigger29) <+ VLOW;
+      V(trigger30) <+ VLOW;
+      V(trigger31) <+ VLOW;
+      V(trigger32) <+ VLOW;
+      V(trigger33) <+ VLOW;
+      V(trigger34) <+ VLOW;
+      V(trigger35) <+ VLOW;
+      V(trigger36) <+ VLOW;
+      V(flag)      <+ VLOW;
+    end else if (count == 37) begin
+      // Flag cycle: all triggers low, flag high.
+      V(trigger1)  <+ VLOW;
+      V(trigger2)  <+ VLOW;
+      V(trigger3)  <+ VLOW;
+      V(trigger4)  <+ VLOW;
+      V(trigger5)  <+ VLOW;
+      V(trigger6)  <+ VLOW;
+      V(trigger7)  <+ VLOW;
+      V(trigger8)  <+ VLOW;
+      V(trigger9)  <+ VLOW;
+      V(trigger10) <+ VLOW;
+      V(trigger11) <+ VLOW;
+      V(trigger12) <+ VLOW;
+      V(trigger13) <+ VLOW;
+      V(trigger14) <+ VLOW;
+      V(trigger15) <+ VLOW;
+      V(trigger16) <+ VLOW;
+      V(trigger17) <+ VLOW;
+      V(trigger18) <+ VLOW;
+      V(trigger19) <+ VLOW;
+      V(trigger20) <+ VLOW;
+      V(trigger21) <+ VLOW;
+      V(trigger22) <+ VLOW;
+      V(trigger23) <+ VLOW;
+      V(trigger24) <+ VLOW;
+      V(trigger25) <+ VLOW;
+      V(trigger26) <+ VLOW;
+      V(trigger27) <+ VLOW;
+      V(trigger28) <+ VLOW;
+      V(trigger29) <+ VLOW;
+      V(trigger30) <+ VLOW;
+      V(trigger31) <+ VLOW;
+      V(trigger32) <+ VLOW;
+      V(trigger33) <+ VLOW;
+      V(trigger34) <+ VLOW;
+      V(trigger35) <+ VLOW;
+      V(trigger36) <+ VLOW;
+      V(flag)      <+ VHIGH;
+    end else begin
+      // For count = 1 to 36, only the corresponding trigger is high.
+      V(trigger1)  <+ ((count==1)  ? VHIGH : VLOW);
+      V(trigger2)  <+ ((count==2)  ? VHIGH : VLOW);
+      V(trigger3)  <+ ((count==3)  ? VHIGH : VLOW);
+      V(trigger4)  <+ ((count==4)  ? VHIGH : VLOW);
+      V(trigger5)  <+ ((count==5)  ? VHIGH : VLOW);
+      V(trigger6)  <+ ((count==6)  ? VHIGH : VLOW);
+      V(trigger7)  <+ ((count==7)  ? VHIGH : VLOW);
+      V(trigger8)  <+ ((count==8)  ? VHIGH : VLOW);
+      V(trigger9)  <+ ((count==9)  ? VHIGH : VLOW);
+      V(trigger10) <+ ((count==10) ? VHIGH : VLOW);
+      V(trigger11) <+ ((count==11) ? VHIGH : VLOW);
+      V(trigger12) <+ ((count==12) ? VHIGH : VLOW);
+      V(trigger13) <+ ((count==13) ? VHIGH : VLOW);
+      V(trigger14) <+ ((count==14) ? VHIGH : VLOW);
+      V(trigger15) <+ ((count==15) ? VHIGH : VLOW);
+      V(trigger16) <+ ((count==16) ? VHIGH : VLOW);
+      V(trigger17) <+ ((count==17) ? VHIGH : VLOW);
+      V(trigger18) <+ ((count==18) ? VHIGH : VLOW);
+      V(trigger19) <+ ((count==19) ? VHIGH : VLOW);
+      V(trigger20) <+ ((count==20) ? VHIGH : VLOW);
+      V(trigger21) <+ ((count==21) ? VHIGH : VLOW);
+      V(trigger22) <+ ((count==22) ? VHIGH : VLOW);
+      V(trigger23) <+ ((count==23) ? VHIGH : VLOW);
+      V(trigger24) <+ ((count==24) ? VHIGH : VLOW);
+      V(trigger25) <+ ((count==25) ? VHIGH : VLOW);
+      V(trigger26) <+ ((count==26) ? VHIGH : VLOW);
+      V(trigger27) <+ ((count==27) ? VHIGH : VLOW);
+      V(trigger28) <+ ((count==28) ? VHIGH : VLOW);
+      V(trigger29) <+ ((count==29) ? VHIGH : VLOW);
+      V(trigger30) <+ ((count==30) ? VHIGH : VLOW);
+      V(trigger31) <+ ((count==31) ? VHIGH : VLOW);
+      V(trigger32) <+ ((count==32) ? VHIGH : VLOW);
+      V(trigger33) <+ ((count==33) ? VHIGH : VLOW);
+      V(trigger34) <+ ((count==34) ? VHIGH : VLOW);
+      V(trigger35) <+ ((count==35) ? VHIGH : VLOW);
+      V(trigger36) <+ ((count==36) ? VHIGH : VLOW);
+      V(flag)      <+ VLOW;
+    end
+  end
+
+endmodule

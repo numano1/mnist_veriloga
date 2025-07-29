@@ -1,0 +1,19 @@
+// VerilogA for LeNet3, vReLU, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module iReLU(inout iin, inout iout);
+  parameter real CLIP_THRESHOLD = 0; // Clipping threshold (default is 0 A)
+  electrical iin, iout;
+
+  analog begin
+    if (I(iin) >= CLIP_THRESHOLD) begin
+      I(iout) <+ I(iin); // Pass the input value when it is above the threshold
+    end else begin
+      I(iout) <+ CLIP_THRESHOLD; // Otherwise, output the clipping threshold
+    end
+  end
+endmodule
+
+

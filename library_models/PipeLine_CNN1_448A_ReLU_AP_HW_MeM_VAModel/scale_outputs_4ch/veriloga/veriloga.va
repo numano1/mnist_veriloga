@@ -1,0 +1,36 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, scale_outputs_4ch, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module scale_outputs_4ch(
+    input electrical V_in0,
+    input electrical V_max0,
+    input electrical V_in1,
+    input electrical V_max1,
+    input electrical V_in2,
+    input electrical V_max2,
+    input electrical V_in3,
+    input electrical V_max3,
+    output electrical V_out0,
+    output electrical V_out1,
+    output electrical V_out2,
+    output electrical V_out3
+);
+
+  // Reference voltage and desired voltage as parameters
+  parameter real V_ref     = 0.6;     // Reference voltage
+  parameter real V_desired = 0.7875;  // Desired voltage
+  
+  // The output is computed as:
+  // V_out = V_ref + (V_in - V_ref) * (V_desired - V_ref) / (V_max - V_ref)
+
+  analog begin
+    V(V_out0) <+ V_ref + (V(V_in0) - V_ref) * (V_desired - V_ref) / (V(V_max0) - V_ref);
+    V(V_out1) <+ V_ref + (V(V_in1) - V_ref) * (V_desired - V_ref) / (V(V_max1) - V_ref);
+    V(V_out2) <+ V_ref + (V(V_in2) - V_ref) * (V_desired - V_ref) / (V(V_max2) - V_ref);
+    V(V_out3) <+ V_ref + (V(V_in3) - V_ref) * (V_desired - V_ref) / (V(V_max3) - V_ref);
+  end
+
+endmodule
+

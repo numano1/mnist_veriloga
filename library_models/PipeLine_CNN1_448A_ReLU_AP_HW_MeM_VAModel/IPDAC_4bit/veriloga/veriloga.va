@@ -1,0 +1,49 @@
+// VerilogA for Kovilta_VerilogA_model, DAC_8bit, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IPDAC_4bit(input [3:0] bin, output Vout, input VFS_IN, input VZS_IN);
+  // Parameters for DAC operation
+  parameter real Vth = 0.6; // Threshold for recognizing a digital '1'
+  parameter integer N = 4;  // Resolution (4 bits)
+
+  // Define the electrical nodes
+  electrical VFS_IN;      // Full-scale (high) voltage input (e.g., 1.2 V)
+  electrical VZS_IN;      // Zero-scale (low) voltage input (e.g., 0 V)
+  electrical Vout;        // DAC output voltage
+  electrical [3:0] bin;   // Digital input bits
+
+  // Internal real variables for the DAC conversion
+  real dac_value;    // Accumulated digital value
+  real dac_value_V;  // Scaled output voltage
+
+  // Loop variable
+  genvar i;
+
+  analog begin
+    // Reset the DAC value at each evaluation
+    dac_value = 0;
+    
+    // Loop over each bit in the input bus
+    for (i = 0; i < N; i = i + 1) begin
+      // If the voltage at the i-th bit is greater than Vth, add 2^i to dac_value.
+      // This assumes bin[0] is the LSB.
+      if (V(bin[i]) > Vth) begin
+        dac_value = dac_value + 2**i;
+      end
+		else begin
+			dac_value = dac_value + 0;
+		end
+    end
+
+    // Normalize the digital value (range 0 to (2^N - 1)) to [0,1] and scale to the voltage range.
+    //dac_value_V = ((dac_value / (2.0**N - 1)) * (V(VFS_IN) - V(VZS_IN))) + V(VZS_IN);
+
+	// the digital value range between VZS and VFS-1LSB
+	dac_value_V = ((dac_value / (2.0**N)) * (V(VFS_IN) - V(VZS_IN))) + V(VZS_IN);
+
+    // Drive the output voltage with the computed DAC value.
+    V(Vout) <+ dac_value_V;
+  end
+endmodule

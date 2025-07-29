@@ -1,0 +1,64 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, DAC_FIFO_controller, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DAC_FIFO_controller(
+    input  new_data_valid,         // signal that new data is available
+    input  clk,                    // clock signal (can be modeled as a voltage source in simulation)
+    input  [20*4-1:0] new_data,      // 20 new 4-bit values concatenated together
+    output [100*4-1:0] dac_in       // output bus that feeds the 100 DACs (each 4-bit)
+);
+  parameter integer FIFO_SIZE = 100;
+  parameter integer UPDATE_COUNT = 20;
+  
+  // Internal memory: a 100-entry array storing 4-bit values.
+  // Note: Verilog-A arrays are less common than in digital Verilog, so you might
+  // need to use an equivalent construct (or multiple internal signals).
+  integer fifo_mem [0:FIFO_SIZE-1];
+  
+  // Pointers to control the circular buffer
+  integer read_ptr, write_ptr;
+  integer i;
+  
+  // A threshold for clock detection (set appropriately)
+  parameter real clk_threshold = 0.6;
+  
+  analog begin
+    // Initialization (only executed once at start-up)
+    if ($initial_step) begin
+      for(i = 0; i < FIFO_SIZE; i = i + 1) begin
+         fifo_mem[i] = 0;  // Initialize all entries (or load initial values)
+      end
+      read_ptr = 0;
+      write_ptr = 0;
+    end
+    
+    // Use a simple edge detector on clk (assuming clk is a voltage that swings above clk_threshold)
+    if (cross(V(clk) - clk_threshold, +1)) begin
+      // When a rising edge is detected and new_data_valid is high,
+      // write 20 new 4-bit values into the FIFO.
+      if (new_data_valid) begin
+         for(i = 0; i < UPDATE_COUNT; i = i + 1) begin
+           // Extract the i-th 4-bit segment from new_data. The syntax here is pseudo-code.
+           // You may need to split new_data into separate signals or use appropriate bit-slicing.
+           fifo_mem[(write_ptr + i) % FIFO_SIZE] = new_data[(i*4) +: 4];
+         end
+         // Advance the pointers (modulo FIFO_SIZE)
+         read_ptr = (read_ptr + UPDATE_COUNT) % FIFO_SIZE;
+         write_ptr = (write_ptr + UPDATE_COUNT) % FIFO_SIZE;
+      end
+    end
+
+    // Continuous assignment of FIFO window to the DAC inputs.
+    // The 100 4-bit values output (dac_in) are taken from fifo_mem starting at read_ptr.
+    // Again, the loop below is conceptual; you may have to instantiate individual
+    // signals or use a generate construct if supported.
+    for (i = 0; i < FIFO_SIZE; i = i + 1) begin
+      // dac_in is a wide bus: bits [i*4 +: 4] correspond to the i-th DAC input.
+      // This assignment is continuous.
+      dac_in[i*4 +: 4] = fifo_mem[(read_ptr + i) % FIFO_SIZE];
+    end
+  end
+endmodule
+

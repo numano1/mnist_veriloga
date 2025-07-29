@@ -1,0 +1,13 @@
+// VerilogA for LeNet5M_CNN1_HW_MeM_Model, VoltageAverager, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Average_pooling_2x2(inout vin1, inout vin2, inout vin3, inout vin4, inout vout);
+  electrical vin1, vin2, vin3, vin4, vout; // Define individual electrical nodes for inputs and output
+
+  analog begin
+    // Compute the average of the 4 input voltages
+    V(vout) <+ (V(vin1) + V(vin2) + V(vin3) + V(vin4)) / 4.0;
+  end
+endmodule

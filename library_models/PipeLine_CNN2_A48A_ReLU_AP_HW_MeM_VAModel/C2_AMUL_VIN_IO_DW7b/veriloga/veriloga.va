@@ -1,0 +1,37 @@
+// VerilogA for LeNet3, CMODE_MDAC_8b, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module C2_AMUL_VIN_IO_DW7b(input VIN, input VZS_IN, input Wx_6, input Wx_5, input Wx_4, input Wx_3, input Wx_2, input Wx_1, input Wx_0, inout iout);
+  parameter real R = 100e3; // Resistor value
+  parameter real Vth = 0.6; // Threshold voltage
+  parameter real Vhigh = 1.2; // High state voltage
+  parameter real Vlow = 0.0; // Low state voltage
+  electrical VZS_IN;
+  electrical VIN;
+  electrical iout;
+  electrical Wx_6;
+  electrical Wx_5;
+  electrical Wx_4;
+  electrical Wx_3;
+  electrical Wx_2;
+  electrical Wx_1;
+  electrical Wx_0;
+  real Imdac; // Current through resistor
+  integer control_val; // Integer value of Wx input
+  integer N = 7; // Wx resolution
+
+  analog begin
+
+    // Convert Wx voltage to digital value (D)
+    control_val = (V(Wx_0) > Vth) + ((V(Wx_1) > Vth) << 1) + ((V(Wx_2) > Vth) << 2) + ((V(Wx_3) > Vth) << 3) + ((V(Wx_4) > Vth) << 4) + ((V(Wx_5) > Vth) << 5) + ((V(Wx_6) > Vth) << 6);
+
+    // Calculate Imdac based on the magnitude formula
+    Imdac = ((V(VIN) - V(VZS_IN)) / R) * (control_val / (2.0 ** N));
+
+     I(iout) <+ -Imdac; // Current from VIN to vpos
+	// I(iout) <+ Imdac;
+
+  end
+endmodule

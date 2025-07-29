@@ -1,0 +1,9 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, OR_GATE, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module OR_GATE;
+
+
+endmodule

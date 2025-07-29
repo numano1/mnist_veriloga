@@ -1,0 +1,26 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, vSigmoid, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module C2_vSigmoid(inout vin, inout vout);
+  electrical vin, vout;
+  
+  // Parameters for the sigmoid transformation.
+  real k = 5.06;         // Gain factor (adjust based on desired steepness)
+  real V_center = 1.391; // Midpoint of the input range ( (2.182+0.6)/2 )
+  real V_min = 0.6;      // Lower bound of the output
+  real V_max = 0.7875;   // Upper bound of the output
+  real V_span = V_max - V_min; // 0.1875 V span
+  real y;
+
+  analog begin
+    // Compute the sigmoid with input scaling
+    y = 1.0 / (1.0 + exp(-k * (V(vin) - V_center)));
+    
+    // Affine transformation to map [0,1] to [V_min,V_max]
+    V(vout) <+ V_min + V_span * y;
+  end
+endmodule
+
+

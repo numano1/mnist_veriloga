@@ -1,0 +1,29 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, Max_pooling_2x2, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module C2_Max_pooling_2x2(inout vin1, inout vin2, inout vin3, inout vin4, inout vout);
+  electrical vin1, vin2, vin3, vin4, vout;
+  real max_val;
+
+  analog begin
+    // Initialize max_val with the first input
+    max_val = V(vin1);
+    
+    // Compare with the other inputs
+    if (V(vin2) > max_val) begin
+      max_val = V(vin2);
+    end
+    if (V(vin3) > max_val) begin
+      max_val = V(vin3);
+    end
+    if (V(vin4) > max_val) begin
+      max_val = V(vin4);
+    end
+
+    // Set the output to the maximum value
+    V(vout) <+ max_val;
+  end
+endmodule
+

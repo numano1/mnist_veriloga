@@ -1,0 +1,16 @@
+#
+# Edit Lock-Stake file. CAUTION: Please do not change.
+#
+# Information about current Edit Lock Owner.
+#
+LockStakeVersion               1.1
+LoginName                      onuman
+HostName                       dent.ecdl.hut.fi
+ProcessIdentifier              24968
+ProcessCreationTime_UTC        1746536405
+ProcessCreationTime_Readable   Tue May  6 16:00:05 2025 EEST
+AppIdentifier                  OA File System Design Manager
+OSType                         unix
+ReasonForPlacingEditLock       OpenAccess edit lock
+FilePathUsedToEditLock         /home/pro/ferrari/onuman/tsmcN65-chip/virtuoso_tsmcN65_LP_onuman/PipeLine_CNN2_A48A_ReLU_AP_HW_MeM_VAModel/C2_AMUL_VIN_IO_DW7b/symbol/symbol.oa.cdslck
+TimeEditLocked                 Tue May  6 18:04:55 2025 EEST

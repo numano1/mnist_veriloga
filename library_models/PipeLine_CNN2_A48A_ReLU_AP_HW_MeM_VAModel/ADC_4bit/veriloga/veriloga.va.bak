@@ -1,0 +1,85 @@
+// VerilogA for PipeLine_CNN2_A48A_ReLU_AP_HW_MeM_VAModel, ADC_4bit, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module ADC_4bit (
+    input electrical clk,        // Clock signal (analog)
+    input electrical enable,     // Enable signal (high > 0.6 V, low = 0 V)
+    inout electrical Vin,        // Analog input voltage to be converted
+    inout electrical Vref_l,     // Low reference voltage
+    inout electrical Vref_h,     // High reference voltage
+    output electrical adc_out0,  // ADC output bit 0 (LSB)
+    output electrical adc_out1,  // ADC output bit 1
+    output electrical adc_out2,  // ADC output bit 2
+    output electrical adc_out3   // ADC output bit 3 (MSB)
+);
+
+  // Parameters for digital voltage levels and threshold.
+  parameter real VHIGH = 1.2;  // Voltage representing digital high
+  parameter real VLOW  = 0.0;  // Voltage representing digital low
+  parameter real VTH   = 0.6;  // Threshold voltage for clock edge and enable
+
+  // Internal variable to store the ADC conversion result (0-15).
+  integer code;
+  real fraction;
+  real Vin_val, Vref_l_val, Vref_h_val;
+
+  //--------------------------------------------------------------------
+  // Initialization: Set ADC code to 0 at simulation start.
+  //--------------------------------------------------------------------
+  analog begin
+    @(initial_step) begin
+      code = 0;
+    end
+  end
+
+  //--------------------------------------------------------------------
+  // Clocked Conversion: On every rising edge of clk (detected when V(clk)
+  // crosses VTH from below), if enable is high, sample Vin and perform the
+  // conversion. The conversion is linear between Vref_l and Vref_h.
+  // If Vin is below Vref_l, code = 0; if Vin is above Vref_h, code = 15.
+  //--------------------------------------------------------------------
+  analog begin
+    @(cross(V(clk) - VTH, +1)) begin
+      if (V(enable) > VTH) begin
+        // Sample the input and reference voltages.
+        Vin_val    = V(Vin);
+        Vref_l_val = V(Vref_l);
+        Vref_h_val = V(Vref_h);
+        if (Vin_val <= Vref_l_val)
+          code = 0;
+        else if (Vin_val >= Vref_h_val)
+          code = 15;
+        else begin
+          fraction = (Vin_val - Vref_l_val) / (Vref_h_val - Vref_l_val);
+          // Multiply by 15 (for a 4-bit range 0-15) and round.
+          code = $floor(fraction * 15.0 + 0.5);
+        end
+      end else begin
+        // When enable is low, force the ADC code to 0.
+        code = 0;
+      end
+    end
+  end
+
+  //--------------------------------------------------------------------
+  // Output Assignment: Convert the integer code (0 to 15) to 4-bit digital
+  // outputs. Each bit is represented by an electrical node driven to VHIGH
+  // (if that bit is 1) or VLOW (if that bit is 0).
+  //
+  // Bit assignment: adc_out0 is LSB, adc_out3 is MSB.
+  //--------------------------------------------------------------------
+  analog begin
+    // Bit 0 (LSB): code modulo 2.
+    V(adc_out0) <+ ((code % 2) == 1 ? VHIGH : VLOW);
+    // Bit 1: the next bit.
+    V(adc_out1) <+ (((code / 2) % 2) == 1 ? VHIGH : VLOW);
+    // Bit 2.
+    V(adc_out2) <+ (((code / 4) % 2) == 1 ? VHIGH : VLOW);
+    // Bit 3 (MSB).
+    V(adc_out3) <+ (((code / 8) % 2) == 1 ? VHIGH : VLOW);
+  end
+
+endmodule
+

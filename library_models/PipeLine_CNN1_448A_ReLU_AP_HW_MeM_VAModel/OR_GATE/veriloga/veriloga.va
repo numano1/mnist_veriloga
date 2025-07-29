@@ -1,0 +1,21 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, OR_GATE, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module OR_GATE(input in1, input in2, output out);
+  parameter real Vhigh = 1.2; // High output voltage
+  parameter real Vlow  = 0.0; // Low output voltage
+  parameter real Vth   = 0.6; // Threshold voltage
+
+  electrical in1, in2, out;
+
+  analog begin
+    // OR gate: if either input exceeds Vth, output is Vhigh; otherwise, Vlow.
+    if ((V(in1) > Vth) || (V(in2) > Vth))
+      V(out) <+ Vhigh;
+    else
+      V(out) <+ Vlow;
+  end
+endmodule
+

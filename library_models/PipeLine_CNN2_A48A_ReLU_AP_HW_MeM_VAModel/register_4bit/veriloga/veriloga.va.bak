@@ -1,0 +1,9 @@
+// VerilogA for PipeLine_CNN2_A48A_ReLU_AP_HW_MeM_VAModel, register_4bit, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module register_4bit;
+
+
+endmodule

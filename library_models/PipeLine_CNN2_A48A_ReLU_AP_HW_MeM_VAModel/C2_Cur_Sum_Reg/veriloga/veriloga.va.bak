@@ -1,0 +1,26 @@
+// VerilogA for Kovilta_VerilogA_model, sum_sub_amps, veriloga
+`include "constants.vams"
+`include "disciplines.vams"
+
+module C2_Cur_Sum_Reg(inout Iin1, inout Iin2, inout Iin3, inout Iin4, inout iout, input Vreg);
+  electrical Iin1, Iin2, Iin3, Iin4, iout, Vreg;
+  //real abs1, abs2, abs3, abs4;
+
+  analog begin
+    // Regulate input terminal voltages to the reference voltage.
+    V(Iin1) <+ V(Vreg);
+    V(Iin2) <+ V(Vreg);
+    V(Iin3) <+ V(Vreg);
+    V(Iin4) <+ V(Vreg);
+
+    // Compute the absolute value of each input current.
+    //abs1 = (I(Iin1) >= 0 ? I(Iin1) : -I(Iin1));
+    //abs2 = (I(Iin2) >= 0 ? I(Iin2) : -I(Iin2));
+    //abs3 = (I(Iin3) >= 0 ? I(Iin3) : -I(Iin3));
+    //abs4 = (I(Iin4) >= 0 ? I(Iin4) : -I(Iin4));
+
+    // Sum the absolute currents and assign to the output.
+    I(iout) <+ (I(Iin1) + I(Iin2) + I(Iin3) + I(Iin4));
+  end
+endmodule
+

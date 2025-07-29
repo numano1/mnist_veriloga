@@ -1,0 +1,16 @@
+// VerilogA for current buffer regulator
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module C2_Current_Buffer_Regulator(inout iin, inout iout, input Vreg);
+  electrical iin, iout, Vreg;
+ 
+  analog begin
+    // Regulate input terminals
+    V(iin) <+ V(Vreg);
+
+	//bypass the current
+    I(iout) <+ -I(iin);
+  end
+endmodule

@@ -1,0 +1,64 @@
+// VerilogA for PipeLine_CNN2_A48A_ReLU_AP_HW_MeM_VAModel, register_4bit, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module register_4bit (
+    input electrical trigger,   // Trigger signal: when >0.6V, register is transparent
+    input electrical in0,       // 4-bit digital inputs
+    input electrical in1,
+    input electrical in2,
+    input electrical in3,
+    output electrical out0,     // 4-bit digital outputs (stored value)
+    output electrical out1,
+    output electrical out2,
+    output electrical out3
+);
+
+  // Define voltage levels and threshold
+  parameter real VHIGH = 1.2;
+  parameter real VLOW  = 0.0;
+  parameter real VTH   = 0.6;
+
+  // Internal storage for each bit
+  real reg0, reg1, reg2, reg3;
+
+  //--------------------------------------------------------------------
+  // Initialize the register at simulation startup.
+  //--------------------------------------------------------------------
+  analog begin
+    @(initial_step) begin
+      reg0 = VLOW;
+      reg1 = VLOW;
+      reg2 = VLOW;
+      reg3 = VLOW;
+    end
+  end
+
+  //--------------------------------------------------------------------
+  // On a rising crossing of the trigger signal (from below VTH to above),
+  // if trigger is high, sample the digital inputs and update the register.
+  //--------------------------------------------------------------------
+  analog begin
+    @(cross(V(trigger) - VTH, +1)) begin
+      if (V(trigger) > VTH) begin
+        reg0 = (V(in0) > VTH) ? VHIGH : VLOW;
+        reg1 = (V(in1) > VTH) ? VHIGH : VLOW;
+        reg2 = (V(in2) > VTH) ? VHIGH : VLOW;
+        reg3 = (V(in3) > VTH) ? VHIGH : VLOW;
+      end
+    end
+  end
+
+  //--------------------------------------------------------------------
+  // Drive the outputs continuously with the stored register values.
+  //--------------------------------------------------------------------
+  analog begin
+    V(out0) <+ reg0;
+    V(out1) <+ reg1;
+    V(out2) <+ reg2;
+    V(out3) <+ reg3;
+  end
+
+endmodule
+

@@ -1,0 +1,36 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, stride_control, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Input_Stride_Control(input [1:0] SEL, output stride_1, output stride_2, output stride_3);
+  parameter real Vhigh = 1.2; // High output voltage
+  parameter real Vlow  = 0.0; // Low output voltage
+  parameter real Vth   = 0.6; // Threshold voltage
+
+  electrical stride_1, stride_2, stride_3;
+  electrical [1:0] SEL;
+
+  analog begin
+    // If SEL1 is low, regardless of SEL0, set stride_1 high.
+    if (V(SEL[1]) < Vth) begin
+      V(stride_1) <+ Vhigh;
+      V(stride_2) <+ Vlow;
+      V(stride_3) <+ Vlow;
+    end else begin
+      // SEL1 is high.
+      if (V(SEL[0]) < Vth) begin
+        // SEL0 low, SEL1 high: select stride_2.
+        V(stride_1) <+ Vlow;
+        V(stride_2) <+ Vhigh;
+        V(stride_3) <+ Vlow;
+      end else begin
+        // SEL0 high, SEL1 high: select stride_3.
+        V(stride_1) <+ Vlow;
+        V(stride_2) <+ Vlow;
+        V(stride_3) <+ Vhigh;
+      end
+    end
+  end
+endmodule
+

@@ -1,0 +1,24 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, vSigmoid, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module vSigmoid(inout vin, inout vout);
+  electrical vin, vout;
+
+  // Parameters chosen to match the circuit behavior in the paper.
+  parameter real V_min   = 0.6;     // Output corresponding to digital "0"
+  parameter real V_max   = 0.7875;  // Output corresponding to digital "1"
+  parameter real V_center = 1.391;  // Approximate center of your input range [(2.182+0.6)/2]
+  parameter real alpha    = 5.0;    // Steepness parameter; adjust to mimic transistor sizing effects
+  real sigmoid;
+  analog begin
+
+    // The basic sigmoid function with adjustable steepness and offset.
+    sigmoid = 1.0 / (1.0 + exp(-alpha*(V(vin) - V_center)));
+    // Map the 0-to-1 sigmoid output onto the desired voltage range.
+    V(vout) <+ V_min + (V_max - V_min)*sigmoid;
+  end
+endmodule
+
+

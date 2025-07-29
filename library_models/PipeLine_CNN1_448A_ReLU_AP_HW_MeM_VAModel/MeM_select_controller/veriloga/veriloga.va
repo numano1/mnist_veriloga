@@ -1,0 +1,82 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, MeM_select_controller, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module MeM_select_controller(
+    input electrical clk,      // Clock input
+    input electrical enable,   // Enable input (high = 1.2 V, low = 0 V)
+    output electrical sel1,    // Select outputs
+    output electrical sel2,
+    output electrical sel3,
+    output electrical sel4,
+    output electrical sel5,
+    output electrical sel6,
+    output electrical flag     // Flag output (goes high when the 6th clock cycle occurs)
+);
+
+  // Define voltage levels and threshold
+  parameter real VHIGH = 1.2;
+  parameter real VLOW  = 0.0;
+  parameter real VTH   = 0.6;
+
+  // Internal counter variable.
+  // We use a value of -1 to indicate that no cycle has been started.
+  integer counter;
+
+  //--------------------------------------------------------------------
+  // Initialization: at simulation start, set counter to -1.
+  //--------------------------------------------------------------------
+  analog begin
+    @(initial_step) begin
+      counter = -1;
+    end
+  end
+
+  //--------------------------------------------------------------------
+  // Clock Event: On each positive clock edge (when clk crosses VTH from below),
+  // if enable is high, update the counter. The counter cycles from 0 to 5.
+  // When enable is low, the counter is reset to -1.
+  //--------------------------------------------------------------------
+  analog begin
+    @(cross(V(clk) - VTH, +1)) begin
+      if (V(enable) > VTH) begin
+        counter = counter + 1;
+        if (counter == 6) begin
+          counter = 0;
+        end
+      end else begin
+        counter = -1;  // Reset counter when enable is low.
+      end
+    end
+  end
+
+  //--------------------------------------------------------------------
+  // Output Assignment: Drive the select signals and flag based on the counter.
+  // When enable is low (or counter is -1), all outputs are low.
+  // Otherwise, one select signal is high according to the counter:
+  //   counter == 0 -> sel1 high, 1 -> sel2 high, ..., 5 -> sel6 high.
+  // Additionally, the flag output is high when counter == 5.
+  //--------------------------------------------------------------------
+  analog begin
+    if (V(enable) <= VTH || counter < 0) begin
+      V(sel1) <+ VLOW;
+      V(sel2) <+ VLOW;
+      V(sel3) <+ VLOW;
+      V(sel4) <+ VLOW;
+      V(sel5) <+ VLOW;
+      V(sel6) <+ VLOW;
+      V(flag)  <+ VLOW;
+    end else begin
+      V(sel1) <+ ((counter == 0) ? VHIGH : VLOW);
+      V(sel2) <+ ((counter == 1) ? VHIGH : VLOW);
+      V(sel3) <+ ((counter == 2) ? VHIGH : VLOW);
+      V(sel4) <+ ((counter == 3) ? VHIGH : VLOW);
+      V(sel5) <+ ((counter == 4) ? VHIGH : VLOW);
+      V(sel6) <+ ((counter == 5) ? VHIGH : VLOW);
+      V(flag)  <+ ((counter == 5) ? VHIGH : VLOW);
+    end
+  end
+
+endmodule
+

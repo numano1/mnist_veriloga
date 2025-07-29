@@ -1,0 +1,14 @@
+// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, vTanh, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module C2_vTanh(inout vin, inout vout);
+  electrical vin, vout;
+
+  analog begin
+    // Compute the tanh function of the input voltage.
+    V(vout) <+ (exp(V(vin)) - exp(-V(vin))) / (exp(V(vin)) + exp(-V(vin)));
+  end
+endmodule
+
