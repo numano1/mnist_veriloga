@@ -7,10 +7,15 @@ This repository contains the **Verilog-A implementation** and **Spectre testbenc
 ## 📁 Repository Structure
 
 mnist_veriloga/
+
 ├── library_models/
+
 ├── test_benches/
+
 ├── vector_files_for_sim/
+
 ├── outputs_maestro_csv/
+
 └── README.md
 
 
