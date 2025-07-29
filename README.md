@@ -2,6 +2,10 @@
 
 This repository contains the **Verilog-A implementation** and **Spectre testbenches** for simulating a **custom analog neural network model** designed for the **MNIST digit classification task**. The network includes analog implementations of convolutional, flattening, and fully connected layers, modeled in Verilog-A and tested in **Cadence Virtuoso** using **Spectre ADE Assembler/Maestro**.
 
+<p align="center">
+  <img src="assets/Framework.pdf" width="500"/>
+</p>
+
 ---
 
 ## 📁 Repository Structure
@@ -15,6 +19,8 @@ mnist_veriloga/
 ├── vector_files_for_sim/
 
 ├── outputs_maestro_csv/
+
+├── assets/
 
 └── README.md
 
