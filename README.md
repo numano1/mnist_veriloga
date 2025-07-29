@@ -92,6 +92,44 @@ To simulate the full classification pipeline in Cadence Virtuoso:
 
 ---
 
+## 🧠 Model Overview
+
+This project implements a **fully analog pipeline architecture** for inference with a Convolutional Neural Network (CNN) trained on the **MNIST dataset**. Unlike traditional digital or mixed-signal accelerators, this architecture processes all layers — convolution, activation, pooling, and partial fully connected logic — using **purely analog signal flow**, minimizing the need for intermediate analog/digital conversions or analog storage.
+
+<p align="center">
+  <img src="assets/CNN_Model.png" width="500"/>
+</p>
+
+### 🔧 Key Features
+
+- **Pipelined analog CNN**: Continuous analog data processing through multiple CNN layers — two convolutional layers, a flattening stage, and two fully connected layers.
+- **Verilog-A modeling**: All analog circuit blocks are behaviorally modeled using Verilog-A for use with Spectre in Cadence Virtuoso.
+- **Modular layer libraries**: Each layer (e.g., Conv1, Conv2, FC1, FC2) is implemented as a separate Virtuoso library with functional analog components like:
+  - Multiply-Accumulate (MAC) units  
+  - Bias addition circuits  
+  - ReLU activation  
+  - Pooling (average/max)
+
+### 📐 Model Architecture
+
+The full model architecture follows the sequence:
+
+Conv1 → Pool1 → Conv2 → Pool2 → Flatten → FC1 → FC2
+
+
+- **Input**: Quantized MNIST images (30×30)
+- **Intermediate computations**: All performed in the analog domain
+- **Output**: Final prediction digit (0–9), digitized only after the last analog stage
+
+### 🎯 Performance & Accuracy
+
+- Designed to run using **hierarchical Verilog-A** to emulate realistic analog circuit behavior
+- The current vector file setup achieves **~96% classification accuracy**
+- Only two ADC conversions occur: one final digitization after the analog pipeline, minimizing energy and complexity
+
+
+---
+
 ## 🗂️ File Cleanup Recommendations
 
 If you've cloned this repo, it's safe to delete `.oa-`, `.oacache`, `.cdslck`, and other **temporary or cache** files. These are excluded via `.gitignore`.
