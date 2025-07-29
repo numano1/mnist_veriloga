@@ -138,7 +138,9 @@ If you've cloned this repo, it's safe to delete `.oa-`, `.oacache`, `.cdslck`, a
 
 ## 📜 License
 
-_(Add a license here if applicable — e.g., MIT, Apache 2.0, or specify "For academic/non-commercial use only.")_
+This project is licensed under the [MIT License](LICENSE).  
+You are free to use, modify, and distribute this code with proper attribution.  
+See the LICENSE file for details.
 
 ---
 
