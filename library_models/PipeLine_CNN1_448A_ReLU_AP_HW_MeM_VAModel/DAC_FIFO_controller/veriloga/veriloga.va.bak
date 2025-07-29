@@ -1,9 +1,0 @@
-// VerilogA for PipeLine_CNN1_448A_ReLU_AP_HW_MeM_VAModel, DAC_FIFO_controller, veriloga
-
-`include "constants.vams"
-`include "disciplines.vams"
-
-module DAC_FIFO_controller;
-
-
-endmodule
