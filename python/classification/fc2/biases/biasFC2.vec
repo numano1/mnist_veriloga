@@ -1,0 +1,26 @@
+; Digital Vector File Header for bFC2_c1_<3:0> to bFC2_c10_<3:0>
+
+radix 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111
+
+io    iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii
+
+vname bFC2_c1_<[3:0]> bFC2_c2_<[3:0]> bFC2_c3_<[3:0]> bFC2_c4_<[3:0]> bFC2_c5_<[3:0]> bFC2_c6_<[3:0]> bFC2_c7_<[3:0]> bFC2_c8_<[3:0]> bFC2_c9_<[3:0]> bFC2_c10_<[3:0]>
+
+tunit 1ns       ; (Optional) Set the time unit (e.g., 1 nanoseconds)
+
+trise 0.01 	; 10 picoseconds
+
+tfall 0.01 	; 10 picoseconds
+
+vih 1.2
+
+vil 0
+
+voh 1.2
+
+vol 0
+
+period 10 ; 100 MHz 
+
+; Data start from here:
+0110 0100 1011 1111 0110 1101 0110 0001 0001 1100
