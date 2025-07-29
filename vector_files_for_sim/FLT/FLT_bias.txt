@@ -1,0 +1,26 @@
+; Digital Vector File Header for bFLT_c1_<3:0> to bFLT_c120_<3:0>
+
+radix 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111
+
+io    iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii
+
+vname bFLT_c1_<[3:0]> bFLT_c2_<[3:0]> bFLT_c3_<[3:0]> bFLT_c4_<[3:0]> bFLT_c5_<[3:0]> bFLT_c6_<[3:0]> bFLT_c7_<[3:0]> bFLT_c8_<[3:0]> bFLT_c9_<[3:0]> bFLT_c10_<[3:0]> bFLT_c11_<[3:0]> bFLT_c12_<[3:0]> bFLT_c13_<[3:0]> bFLT_c14_<[3:0]> bFLT_c15_<[3:0]> bFLT_c16_<[3:0]> bFLT_c17_<[3:0]> bFLT_c18_<[3:0]> bFLT_c19_<[3:0]> bFLT_c20_<[3:0]> bFLT_c21_<[3:0]> bFLT_c22_<[3:0]> bFLT_c23_<[3:0]> bFLT_c24_<[3:0]> bFLT_c25_<[3:0]> bFLT_c26_<[3:0]> bFLT_c27_<[3:0]> bFLT_c28_<[3:0]> bFLT_c29_<[3:0]> bFLT_c30_<[3:0]> bFLT_c31_<[3:0]> bFLT_c32_<[3:0]> bFLT_c33_<[3:0]> bFLT_c34_<[3:0]> bFLT_c35_<[3:0]> bFLT_c36_<[3:0]> bFLT_c37_<[3:0]> bFLT_c38_<[3:0]> bFLT_c39_<[3:0]> bFLT_c40_<[3:0]> bFLT_c41_<[3:0]> bFLT_c42_<[3:0]> bFLT_c43_<[3:0]> bFLT_c44_<[3:0]> bFLT_c45_<[3:0]> bFLT_c46_<[3:0]> bFLT_c47_<[3:0]> bFLT_c48_<[3:0]> bFLT_c49_<[3:0]> bFLT_c50_<[3:0]> bFLT_c51_<[3:0]> bFLT_c52_<[3:0]> bFLT_c53_<[3:0]> bFLT_c54_<[3:0]> bFLT_c55_<[3:0]> bFLT_c56_<[3:0]> bFLT_c57_<[3:0]> bFLT_c58_<[3:0]> bFLT_c59_<[3:0]> bFLT_c60_<[3:0]> bFLT_c61_<[3:0]> bFLT_c62_<[3:0]> bFLT_c63_<[3:0]> bFLT_c64_<[3:0]> bFLT_c65_<[3:0]> bFLT_c66_<[3:0]> bFLT_c67_<[3:0]> bFLT_c68_<[3:0]> bFLT_c69_<[3:0]> bFLT_c70_<[3:0]> bFLT_c71_<[3:0]> bFLT_c72_<[3:0]> bFLT_c73_<[3:0]> bFLT_c74_<[3:0]> bFLT_c75_<[3:0]> bFLT_c76_<[3:0]> bFLT_c77_<[3:0]> bFLT_c78_<[3:0]> bFLT_c79_<[3:0]> bFLT_c80_<[3:0]> bFLT_c81_<[3:0]> bFLT_c82_<[3:0]> bFLT_c83_<[3:0]> bFLT_c84_<[3:0]> bFLT_c85_<[3:0]> bFLT_c86_<[3:0]> bFLT_c87_<[3:0]> bFLT_c88_<[3:0]> bFLT_c89_<[3:0]> bFLT_c90_<[3:0]> bFLT_c91_<[3:0]> bFLT_c92_<[3:0]> bFLT_c93_<[3:0]> bFLT_c94_<[3:0]> bFLT_c95_<[3:0]> bFLT_c96_<[3:0]> bFLT_c97_<[3:0]> bFLT_c98_<[3:0]> bFLT_c99_<[3:0]> bFLT_c100_<[3:0]> bFLT_c101_<[3:0]> bFLT_c102_<[3:0]> bFLT_c103_<[3:0]> bFLT_c104_<[3:0]> bFLT_c105_<[3:0]> bFLT_c106_<[3:0]> bFLT_c107_<[3:0]> bFLT_c108_<[3:0]> bFLT_c109_<[3:0]> bFLT_c110_<[3:0]> bFLT_c111_<[3:0]> bFLT_c112_<[3:0]> bFLT_c113_<[3:0]> bFLT_c114_<[3:0]> bFLT_c115_<[3:0]> bFLT_c116_<[3:0]> bFLT_c117_<[3:0]> bFLT_c118_<[3:0]> bFLT_c119_<[3:0]> bFLT_c120_<[3:0]> 
+
+tunit 1ns       ; (Optional) Set the time unit (e.g., 1 nanoseconds)
+
+trise 0.01 	; 10 picoseconds
+
+tfall 0.01 	; 10 picoseconds
+
+vih 1.2
+
+vil 0
+
+voh 1.2
+
+vol 0
+
+period 10 ; 100 MHz 
+
+; Data start from here: 
+1101 1101 0101 1010 0101 0001 0010 0011 1001 0010 1100 1000 0100 0001 0010 0100 0100 1010 1001 1100 1001 1010 1000 1010 1011 0010 1011 1010 0001 0001 1100 1011 1010 0011 1110 0001 1001 0100 0100 0001 0100 1010 0010 1010 1000 0011 0010 0011 0001 1000 1011 1000 0011 1000 1001 0001 0011 0011 0100 1000 1011 1010 1000 1101 1000 1011 0011 0010 0010 1000 1011 1111 0010 1001 1101 1010 1111 0101 1101 1011 0001 1101 0010 1011 0010 0101 1001 1011 1100 1001 0100 1001 0101 1001 0011 0010 0101 1010 1000 0010 1000 1101 1101 1100 1110 0001 1010 0010 1111 0010 0011 0001 1111 0001 0001 0010 0101 0010 0001 0100

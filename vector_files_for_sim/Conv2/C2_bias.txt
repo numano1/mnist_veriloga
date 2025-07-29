@@ -1,0 +1,26 @@
+; Digital Vector File Header for C2_w_b_OPCH1_<7:0> to C2_w_b_OPCH8_<7:0>
+
+radix 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111
+
+io    iiiiiiii iiiiiiii iiiiiiii iiiiiiii iiiiiiii iiiiiiii iiiiiiii iiiiiiii
+
+vname C2_w_b_OPCH1_<[7:0]> C2_w_b_OPCH2_<[7:0]> C2_w_b_OPCH3_<[7:0]> C2_w_b_OPCH4_<[7:0]> C2_w_b_OPCH5_<[7:0]> C2_w_b_OPCH6_<[7:0]> C2_w_b_OPCH7_<[7:0]> C2_w_b_OPCH8_<[7:0]>
+
+tunit 1ns           ; (Optional) Set the time unit (e.g., 1 nanoseconds)
+
+trise 0.01 	; 10 picoseconds
+
+tfall 0.01 	; 10 picoseconds
+
+vih 1.2
+
+vil 0
+
+voh 1.2
+
+vol 0
+
+period 10 ; 100 MHz 
+
+; Data start from here:
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000

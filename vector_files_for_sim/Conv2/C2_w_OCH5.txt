@@ -1,0 +1,29 @@
+; Digital Vector File Header for C2_w_C1CH1_OPCH5_1_<[3:0]> to C2_w_C1CH1_OPCH5_9_<[3:0]> and ...
+; Digital Vector File Header for C2_w_C1CH2_OPCH5_1_<[3:0]> to C2_w_C1CH2_OPCH5_9_<[3:0]> and ...
+; Digital Vector File Header for C2_w_C1CH3_OPCH5_1_<[3:0]> to C2_w_C1CH3_OPCH5_9_<[3:0]> and ...
+; Digital Vector File Header for C2_w_C1CH4_OPCH5_1_<[3:0]> to C2_w_C1CH4_OPCH5_9_<[3:0]>
+
+radix 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111
+
+io    iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii
+
+vname C2_w_C1CH1_OPCH5_1_<[3:0]> C2_w_C1CH1_OPCH5_2_<[3:0]> C2_w_C1CH1_OPCH5_3_<[3:0]> C2_w_C1CH1_OPCH5_4_<[3:0]> C2_w_C1CH1_OPCH5_5_<[3:0]> C2_w_C1CH1_OPCH5_6_<[3:0]> C2_w_C1CH1_OPCH5_7_<[3:0]> C2_w_C1CH1_OPCH5_8_<[3:0]> C2_w_C1CH1_OPCH5_9_<[3:0]> C2_w_C1CH2_OPCH5_1_<[3:0]> C2_w_C1CH2_OPCH5_2_<[3:0]> C2_w_C1CH2_OPCH5_3_<[3:0]> C2_w_C1CH2_OPCH5_4_<[3:0]> C2_w_C1CH2_OPCH5_5_<[3:0]> C2_w_C1CH2_OPCH5_6_<[3:0]> C2_w_C1CH2_OPCH5_7_<[3:0]> C2_w_C1CH2_OPCH5_8_<[3:0]> C2_w_C1CH2_OPCH5_9_<[3:0]> C2_w_C1CH3_OPCH5_1_<[3:0]> C2_w_C1CH3_OPCH5_2_<[3:0]> C2_w_C1CH3_OPCH5_3_<[3:0]> C2_w_C1CH3_OPCH5_4_<[3:0]> C2_w_C1CH3_OPCH5_5_<[3:0]> C2_w_C1CH3_OPCH5_6_<[3:0]> C2_w_C1CH3_OPCH5_7_<[3:0]> C2_w_C1CH3_OPCH5_8_<[3:0]> C2_w_C1CH3_OPCH5_9_<[3:0]> C2_w_C1CH4_OPCH5_1_<[3:0]> C2_w_C1CH4_OPCH5_2_<[3:0]> C2_w_C1CH4_OPCH5_3_<[3:0]> C2_w_C1CH4_OPCH5_4_<[3:0]> C2_w_C1CH4_OPCH5_5_<[3:0]> C2_w_C1CH4_OPCH5_6_<[3:0]> C2_w_C1CH4_OPCH5_7_<[3:0]> C2_w_C1CH4_OPCH5_8_<[3:0]> C2_w_C1CH4_OPCH5_9_<[3:0]>
+
+tunit 1ns           ; (Optional) Set the time unit (e.g., 1 nanoseconds)
+
+trise 0.01 	; 10 picoseconds
+
+tfall 0.01 	; 10 picoseconds
+
+vih 1.2
+
+vil 0
+
+voh 1.2
+
+vol 0
+
+period 10 ; 100 MHz 
+
+; Data start from here:
+0011 0011 0011 1011 1110 0011 0011 1100 1100 0110 0101 0100 1100 0111 1100 0011 1010 0100 1010 0010 0011 0011 0101 0101 0101 1001 1001 0100 0011 1011 1010 1100 1010 1100 0001 0110

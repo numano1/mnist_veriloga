@@ -1,0 +1,26 @@
+; Digital Vector File Header for C1_wch1_b_<7:0> to C1_wch4_b_<7:0>
+
+radix 11111111 11111111 11111111 11111111
+
+io    iiiiiiii iiiiiiii iiiiiiii iiiiiiii
+
+vname C1_wch1_b_<[7:0]> C1_wch2_b_<[7:0]> C1_wch3_b_<[7:0]> C1_wch4_b_<[7:0]>
+
+tunit 1ns           ; (Optional) Set the time unit (e.g., 1 nanoseconds)
+
+trise 0.01 	; 10 picoseconds
+
+tfall 0.01 	; 10 picoseconds
+
+vih 1.2
+
+vil 0
+
+voh 1.2
+
+vol 0
+
+period 10 ; 100 MHz 
+
+; Data start from here:
+00000000 00000000 00000000 00000000

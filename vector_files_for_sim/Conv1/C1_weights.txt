@@ -1,0 +1,29 @@
+; Digital Vector File Header for C1_wch1_1_<3:0> to C1_wch1_9_<3:0> and ... 
+; Digital Vector File Header for C1_wch2_1_<3:0> to C1_wch2_9_<3:0> and ... 
+; Digital Vector File Header for C1_wch3_1_<3:0> to C1_wch3_9_<3:0> and ...
+; Digital Vector File Header for C1_wch4_1_<3:0> to C1_wch4_9_<3:0>
+
+radix 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111
+
+io    iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii iiii
+
+vname C1_wch1_1_<[3:0]> C1_wch1_2_<[3:0]> C1_wch1_3_<[3:0]> C1_wch1_4_<[3:0]> C1_wch1_5_<[3:0]> C1_wch1_6_<[3:0]> C1_wch1_7_<[3:0]> C1_wch1_8_<[3:0]> C1_wch1_9_<[3:0]> C1_wch2_1_<[3:0]> C1_wch2_2_<[3:0]> C1_wch2_3_<[3:0]> C1_wch2_4_<[3:0]> C1_wch2_5_<[3:0]> C1_wch2_6_<[3:0]> C1_wch2_7_<[3:0]> C1_wch2_8_<[3:0]> C1_wch2_9_<[3:0]> C1_wch3_1_<[3:0]> C1_wch3_2_<[3:0]> C1_wch3_3_<[3:0]> C1_wch3_4_<[3:0]> C1_wch3_5_<[3:0]> C1_wch3_6_<[3:0]> C1_wch3_7_<[3:0]> C1_wch3_8_<[3:0]> C1_wch3_9_<[3:0]> C1_wch4_1_<[3:0]> C1_wch4_2_<[3:0]> C1_wch4_3_<[3:0]> C1_wch4_4_<[3:0]> C1_wch4_5_<[3:0]> C1_wch4_6_<[3:0]> C1_wch4_7_<[3:0]> C1_wch4_8_<[3:0]> C1_wch4_9_<[3:0]>
+
+tunit 1ns           ; (Optional) Set the time unit (e.g., 1 nanoseconds)
+
+trise 0.01 	; 10 picoseconds
+
+tfall 0.01 	; 10 picoseconds
+
+vih 1.2
+
+vil 0
+
+voh 1.2
+
+vol 0
+
+period 10 ; 100 MHz 
+
+; Data start from here:
+1111 1100 0110 1101 0110 1011 1010 1110 0100 1001 1010 1110 0001 1000 0001 0110 0111 0100 1000 1001 0011 1110 0111 1011 0101 0011 1101 0101 0001 1101 0111 1010 1101 0011 1100 1011
